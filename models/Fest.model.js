@@ -20,10 +20,13 @@ const festSchema = new Schema(
         genre: {
             type: String,
             required: [true, 'Genre is required.'],
+            enum: ['Electro', 'Hip hop', 'Rock & Roll', 'Alternative', 'Reggae', 'Classic', 'Jazz', 'Mix', 'Other']
         },
         imageUrl: {
             type: String,
             required: [true, 'Image is required.'],
+            default: 'https://festamajor.vilafranca.cat/sites/default/files/02000023000006900017.jpg',
+            set: value => value === '' ? 'https://festamajor.vilafranca.cat/sites/default/files/02000023000006900017.jpg' : value
         },
         startDate: {
             type: Date,
@@ -39,6 +42,10 @@ const festSchema = new Schema(
             },
             coordinates: [Number]
         },
+        comments: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
+        }],
         owner: {
             type: Schema.Types.ObjectId,
             ref: 'User'

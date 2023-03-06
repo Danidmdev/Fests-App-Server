@@ -5,21 +5,31 @@ Base URL '/fests'
 | HTTP Method  | URI path      | Description               |
 |--------------|---------------|---------------------------|
 | GET          | '/getAllFests'| All Fests list            |
+| GET          | '/details/:id'| Matching ID fest details  |
 | POST         | '/newFest'    | Create new fest           |
-| GET          | '/:id'        | Matching ID fest details  |
-| PUT          | '/:id/edit'   | Matching ID fest edition  |
-| DELETE       | '/:id/delete' | Matching ID fest deletion |
+| PUT          | '/edit/:id'   | Matching ID fest edition  |
+| DELETE       | '/delete/:id' | Matching ID fest deletion |
 
 
 AUTH ROUTES
 
 Base URL '/auth'
 
-| HTTP Met    | URI path      | Description         |
-|-------------|---------------|---------------------|
-| POST        | '/signup'     | Signup user         |
-| POST        | '/login'      | Login user          |
-| GET         | '/verify'     | Verify Auth toke    |
-| PUT         | '/:id/edit'   | User edit by ID     |
-| DELETE      | '/:id/delete' | User delete by ID   |
+| HTTP Met    | URI path       | Description         |
+|-------------|----------------|---------------------|
+| GET         | '/verify'      | Verify Auth toke    |
+| POST        | '/signup'      | Signup user         |
+| POST        | '/login'       | Login user          |
+
+
+USER ROUTES
+
+Base URL '/users'
+
+| HTTP Met    | URI path               | Description         |
+|-------------|------------------------|---------------------|
+| GET         | '/getAllUsers          | All users list      |
+| GET         | '/profile/:id'         | User profile by ID  |
+| PUT         | '/edit-profile/:id'    | User edit by ID     |
+| DELETE      | '/delete-profile/:id'  | User delete by ID   |
 
