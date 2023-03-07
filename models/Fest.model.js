@@ -24,7 +24,6 @@ const festSchema = new Schema(
         },
         imageUrl: {
             type: String,
-            required: [true, 'Image is required.'],
             default: 'https://festamajor.vilafranca.cat/sites/default/files/02000023000006900017.jpg',
             set: value => value === '' ? 'https://festamajor.vilafranca.cat/sites/default/files/02000023000006900017.jpg' : value
         },

@@ -21,7 +21,6 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    required: [true, 'Image is required.'],
     default: 'https://img2.freepng.es/20180407/kce/kisspng-computer-icons-avatar-user-profile-contact-5ac87865a18d00.9369584415230874616617.jpg',
     set: value => value === '' ? 'https://img2.freepng.es/20180407/kce/kisspng-computer-icons-avatar-user-profile-contact-5ac87865a18d00.9369584415230874616617.jpg' : value
   },

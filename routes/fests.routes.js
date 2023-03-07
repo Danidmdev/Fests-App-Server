@@ -7,7 +7,7 @@ router.get("/getAllFests", (req, res, next) => {
   Fest
     .find()
     .sort({ title: 1 })
-    .select({ title: 1, imageUrl: 1, owner: 1 })
+    // .select({ title: 1, imageUrl: 1, owner: 1 })
     .then(response => res.json(response))
     .catch(err => next(err))
 })
