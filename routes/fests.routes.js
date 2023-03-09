@@ -1,5 +1,7 @@
-const router = require("express").Router();
+const router = require("express").Router()
 const Fest = require('./../models/Fest.model')
+
+const { verifyToken } = require('../middlewares/verifyToken')
 
 
 router.get("/getAllFests", (req, res, next) => {
@@ -24,9 +26,10 @@ router.get("/details/:fest_id", (req, res, next) => {
 })
 
 
-router.post("/newFest", (req, res, next) => {
+router.post("/newFest", verifyToken, (req, res, next) => {
 
-  const { title, description, price, genre, imageUrl, startDate, endDate, location, owner } = req.body
+  const { title, description, price, genre, imageUrl, startDate, endDate, location } = req.body
+  const { _id: owner } = req.payload
 
   Fest
     .create({ title, description, price, genre, imageUrl, startDate, endDate, location, owner })
@@ -36,11 +39,16 @@ router.post("/newFest", (req, res, next) => {
 
 router.put('/edit/:fest_id', (req, res, next) => {
   const { fest_id } = req.params
-  const { title, description, price, genre, imageUrl, startDate, endDate } = req.body
+  let { title, description, price, genre, imageUrl, startDate, endDate } = req.body
 
   Fest
-    .findByIdAndUpdate(fest_id, { title, description, price, genre, imageUrl, startDate, endDate })
-    .then(response => res.json(response))
+    .findById(fest_id)
+    .then(fest => {
+      if (imageUrl === '') { imageUrl = fest.imageUrl }
+      Fest
+        .findByIdAndUpdate(fest_id, { title, description, price, genre, imageUrl, startDate, endDate })
+        .then(response => res.json(response))
+    })
     .catch(err => next(err))
 })
 
@@ -54,4 +62,4 @@ router.delete('/delete/:fest_id', (req, res, next) => {
     .catch(err => next(err))
 })
 
-module.exports = router;
+module.exports = router
