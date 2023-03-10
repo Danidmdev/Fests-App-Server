@@ -24,11 +24,15 @@ router.get('/profile/:user_id', (req, res, next) => {
 router.put('/edit-profile/:user_id', (req, res, next) => {
 
     const { user_id } = req.params
-    const { username, avatar } = req.body
-
+    let { username, avatar, email } = req.body
     User
-        .findByIdAndUpdate(user_id, { username, avatar })
-        .then(response => res.json(response))
+        .findById(user_id)
+        .then(user => {
+            if (avatar === '') { avatar = user.avatar }
+            User
+                .findByIdAndUpdate(user_id, { username, avatar, email })
+                .then(response => res.json(response))
+        })
         .catch(err => next(err))
 })
 
