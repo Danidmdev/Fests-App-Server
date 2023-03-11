@@ -20,7 +20,7 @@ const festSchema = new Schema(
         genre: {
             type: String,
             required: [true, 'Genre is required.'],
-            enum: ['Electro', 'Hip hop', 'Rock & Roll', 'Alternative', 'Reggae', 'Classic', 'Jazz', 'Mix', 'Other']
+            enum: ['Electro', 'Hip hop', 'Rock', 'Alternative', 'Reggae', 'Classic', 'Jazz', 'Mix', 'Other']
         },
         imageUrl: {
             type: String,

@@ -25,6 +25,16 @@ router.get("/details/:fest_id", (req, res, next) => {
     .catch(err => next(err))
 })
 
+router.get("/getFestByOwner/:owner", (req, res, next) => {
+
+  const { owner } = req.params
+
+  Fest
+    .find({ owner })
+    .then(response => res.json(response))
+    .catch(err => next(err))
+})
+
 
 router.post("/newFest", verifyToken, (req, res, next) => {
 

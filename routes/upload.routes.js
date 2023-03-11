@@ -5,7 +5,7 @@ const uploaderMiddleware = require("../middlewares/uploader.middleware")
 router.post('/image', uploaderMiddleware.single('imageData'), (req, res) => {
 
     if (!req.file) {
-        res.status(500).json({ errorMessage: 'Error caragndo el archivo' })
+        res.status(500).json({ errorMessage: 'Error caragando el archivo' })
         return
     }
 
