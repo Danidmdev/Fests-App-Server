@@ -21,6 +21,7 @@ router.get("/details/:fest_id", (req, res, next) => {
 
   Fest
     .findById(fest_id)
+    .populate('owner fans')
     .then(response => res.json(response))
     .catch(err => next(err))
 })
@@ -72,4 +73,30 @@ router.delete('/delete/:fest_id', (req, res, next) => {
     .catch(err => next(err))
 })
 
+
+router.put('/join/:fest_id', verifyToken, (req, res, next) => {
+
+  const { fest_id } = req.params
+  const { _id: fan } = req.payload
+
+  Fest
+    .findByIdAndUpdate(fest_id, { $addToSet: { fans: fan } }, { new: true })
+    .then(response => res.json(response))
+    .catch(err => next(err))
+
+})
+
+router.put('/leave/:fest_id', verifyToken, (req, res, next) => {
+
+  const { fest_id } = req.params
+  const { _id: fan } = req.payload
+
+  Fest
+    .findByIdAndUpdate(fest_id, { $pull: { fans: fan } }, { new: true })
+    .then(response => res.json(response))
+    .catch(err => next(err))
+})
+
 module.exports = router
+
+

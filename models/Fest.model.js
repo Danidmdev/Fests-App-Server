@@ -27,6 +27,9 @@ const festSchema = new Schema(
             default: 'https://festamajor.vilafranca.cat/sites/default/files/02000023000006900017.jpg',
             set: value => value === '' ? 'https://festamajor.vilafranca.cat/sites/default/files/02000023000006900017.jpg' : value
         },
+        // video: {
+        //     type: String
+        // },
         startDate: {
             type: Date,
             required: [true, 'Start date is required']
@@ -48,7 +51,11 @@ const festSchema = new Schema(
         owner: {
             type: Schema.Types.ObjectId,
             ref: 'User'
-        }
+        },
+        fans: [{
+            ref: 'User',
+            type: Schema.Types.ObjectId,
+        }],
     },
     {
         timestamps: true

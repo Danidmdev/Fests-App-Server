@@ -14,7 +14,7 @@ module.exports = (app) => {
     }
 
     if (err.code && err.code === 11000) {
-      res.status(409).json({ errorMessages: ['User is already in the database'] })
+      res.status(409).json({ errorMessages: ['Already in the database'] })
     }
 
     if (!res.headersSent) {
