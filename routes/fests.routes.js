@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const Fest = require('./../models/Fest.model')
 
+
 const { verifyToken } = require('../middlewares/verifyToken')
 
 
@@ -9,7 +10,6 @@ router.get("/getAllFests", (req, res, next) => {
   Fest
     .find()
     .sort({ title: 1 })
-    // .select({ title: 1, imageUrl: 1, owner: 1 })
     .then(response => res.json(response))
     .catch(err => next(err))
 })
@@ -36,28 +36,37 @@ router.get("/getFestByOwner/:owner", (req, res, next) => {
     .catch(err => next(err))
 })
 
+router.get("/getFestJoinedById/:fans_id", (req, res, next) => {
+
+  const { fans_id } = req.params
+
+  Fest
+    .find({ fans: { $in: [fans_id] } })
+    .then(response => res.json(response))
+    .catch(err => next(err))
+})
 
 router.post("/newFest", verifyToken, (req, res, next) => {
 
-  const { title, description, price, genre, imageUrl, startDate, endDate, location } = req.body
+  const { title, description, price, genre, imageUrl, startDate, endDate, location, video, website } = req.body
   const { _id: owner } = req.payload
 
   Fest
-    .create({ title, description, price, genre, imageUrl, startDate, endDate, location, owner })
+    .create({ title, description, price, genre, imageUrl, startDate, endDate, location, owner, video, website })
     .then(response => res.json(response))
     .catch(err => next(err))
 })
 
 router.put('/edit/:fest_id', (req, res, next) => {
   const { fest_id } = req.params
-  let { title, description, price, genre, imageUrl, startDate, endDate } = req.body
+  let { title, description, price, genre, imageUrl, startDate, endDate, video, website } = req.body
 
   Fest
     .findById(fest_id)
     .then(fest => {
       if (imageUrl === '') { imageUrl = fest.imageUrl }
       Fest
-        .findByIdAndUpdate(fest_id, { title, description, price, genre, imageUrl, startDate, endDate })
+        .findByIdAndUpdate(fest_id, { title, description, price, genre, imageUrl, startDate, endDate, video, website })
         .then(response => res.json(response))
     })
     .catch(err => next(err))

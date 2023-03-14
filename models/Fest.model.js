@@ -27,9 +27,7 @@ const festSchema = new Schema(
             default: 'https://festamajor.vilafranca.cat/sites/default/files/02000023000006900017.jpg',
             set: value => value === '' ? 'https://festamajor.vilafranca.cat/sites/default/files/02000023000006900017.jpg' : value
         },
-        // video: {
-        //     type: String
-        // },
+
         startDate: {
             type: Date,
             required: [true, 'Start date is required']
@@ -37,12 +35,6 @@ const festSchema = new Schema(
         endDate: {
             type: Date,
             required: [true, 'End date is required']
-        },
-        location: {
-            type: {
-                type: String
-            },
-            coordinates: [Number]
         },
         comments: [{
             type: Schema.Types.ObjectId,
@@ -56,6 +48,13 @@ const festSchema = new Schema(
             ref: 'User',
             type: Schema.Types.ObjectId,
         }],
+        video: {
+            type: String
+        },
+        website: {
+            type: String
+        }
+
     },
     {
         timestamps: true

@@ -6,7 +6,6 @@ router.get('/getAllUsers', (req, res, next) => {
     User
         .find({ role: 'USER' })
         .sort({ createdAt: 1 })
-        // .select({ username: 1, avatar: 1 })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
