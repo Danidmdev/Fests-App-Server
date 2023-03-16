@@ -46,7 +46,7 @@ router.put('/edit-comment/:comment_id', (req, res, next) => {
         .catch(err => next(err))
 })
 
-router.delete('/delete-comment/:comment_id', verifyToken, (req, res, next) => {
+router.delete('/delete-comment/:comment_id/:fest_id', verifyToken, (req, res, next) => {
 
     const { comment_id, fest_id } = req.params
     const { _id: owner } = req.payload
