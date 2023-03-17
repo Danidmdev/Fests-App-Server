@@ -54,7 +54,6 @@ router.delete('/delete-comment/:comment_id/:fest_id', verifyToken, (req, res, ne
     Comment
         .findByIdAndDelete(comment_id, { owner })
         .then(response => {
-            console.log('----', response)
             return Fest.findByIdAndUpdate(fest_id, { $pull: { comments: response._id } })
         })
         .then(fest => res.json(fest))
